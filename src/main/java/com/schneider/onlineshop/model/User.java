@@ -4,7 +4,6 @@ package com.schneider.onlineshop.model;
 import java.util.Objects;
 
 public class User {
-
     private Long userID;
     private String name;
     private String email;

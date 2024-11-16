@@ -3,7 +3,6 @@ package com.schneider.onlineshop.model;
 import java.util.Objects;
 
 public class Favorite {
-
     private Long favoriteID;
     private Long userID;
     private Long productID;

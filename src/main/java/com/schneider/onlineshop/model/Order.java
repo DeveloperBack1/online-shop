@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Order {
+
     private Long orderId;
     private Long userId;
     Timestamp createdAt;

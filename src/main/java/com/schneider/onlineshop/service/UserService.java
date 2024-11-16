@@ -1,6 +1,5 @@
 package com.schneider.onlineshop.service;
 
-
 import com.schneider.onlineshop.model.User;
 import org.springframework.stereotype.Service;
 

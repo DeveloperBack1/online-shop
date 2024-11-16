@@ -3,6 +3,7 @@ package com.schneider.onlineshop.model;
 import java.util.Objects;
 
 public class Category {
+
     private long categoryID ;
     private String name ;
 

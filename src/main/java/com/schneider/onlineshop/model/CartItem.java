@@ -3,6 +3,7 @@ package com.schneider.onlineshop.model;
 import java.util.Objects;
 
 public class CartItem {
+
     private int cartItemID;
     private int cartID;
     private int productID;

@@ -1,6 +1,5 @@
 package com.schneider.onlineshop.controller;
 
-
 import com.schneider.onlineshop.model.Product;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

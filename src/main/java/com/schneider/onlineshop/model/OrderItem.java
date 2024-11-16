@@ -4,7 +4,6 @@ package com.schneider.onlineshop.model;
 import java.util.Objects;
 
 public class OrderItem {
-
     private int orderItemID;
     private int orderID;
     private int productID;

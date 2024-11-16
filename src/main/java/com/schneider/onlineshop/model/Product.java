@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Product {
-
     private Long ProductID;
     private String name;
     private String description;

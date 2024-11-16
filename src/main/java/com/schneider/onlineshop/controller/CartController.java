@@ -45,6 +45,7 @@ public class CartController {
             Cart cart = existingCart.get();
             cart.setUserID(updatedCart.getUserID());
             cart.setCartItems(updatedCart.getCartItems());
+
             return ResponseEntity.ok(cart);
         } else {
             return ResponseEntity.notFound().build();

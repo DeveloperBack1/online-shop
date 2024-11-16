@@ -1,6 +1,5 @@
 package com.schneider.onlineshop.controller;
 
-
 import com.schneider.onlineshop.model.User;
 import com.schneider.onlineshop.service.UserService;
 import org.springframework.http.ResponseEntity;

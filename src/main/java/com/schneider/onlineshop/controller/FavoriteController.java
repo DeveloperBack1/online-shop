@@ -1,6 +1,5 @@
 package com.schneider.onlineshop.controller;
 
-
 import com.schneider.onlineshop.model.Favorite;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
