@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class UserService {
+
     private List<User> users = new ArrayList<>();
 
     public UserService() {

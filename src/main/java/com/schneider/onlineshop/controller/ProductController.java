@@ -43,6 +43,7 @@ public class ProductController {
 
     // Создать новый продукт
     @PostMapping
+
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         product.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         product.setUpdatedAt(null);

@@ -7,22 +7,22 @@ public class Order {
     private Long orderId;
     private Long userId;
     Timestamp createdAt;
+    Timestamp updatedAt;
     private String deliveryAddress;
     private String contactPhone;
     private String deliveryMethod;
-    Enum Status;
-    Timestamp updatedAt;
+    Enum status;
 
-    public Order(Long orderId, Long userId, Timestamp createdAt, String deliveryAddress, String contactPhone,
-                 String deliveryMethod, Enum status, Timestamp updatedAt) {
+    public Order(Long orderId, Long userId, Timestamp createdAt, Timestamp updatedAt,
+                 String deliveryAddress, String contactPhone, String deliveryMethod, Enum status) {
         this.orderId = orderId;
         this.userId = userId;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.deliveryAddress = deliveryAddress;
         this.contactPhone = contactPhone;
         this.deliveryMethod = deliveryMethod;
-        Status = status;
-        this.updatedAt = updatedAt;
+        this.status = status;
     }
 
     public Long getOrderId() {
@@ -47,6 +47,14 @@ public class Order {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public String getDeliveryAddress() {
@@ -74,19 +82,11 @@ public class Order {
     }
 
     public Enum getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(Enum status) {
-        Status = status;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+        this.status = status;
     }
 
     @Override
@@ -94,12 +94,12 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return Objects.equals(orderId, order.orderId) && Objects.equals(userId, order.userId) && Objects.equals(createdAt, order.createdAt) && Objects.equals(deliveryAddress, order.deliveryAddress) && Objects.equals(contactPhone, order.contactPhone) && Objects.equals(deliveryMethod, order.deliveryMethod) && Objects.equals(Status, order.Status) && Objects.equals(updatedAt, order.updatedAt);
+        return Objects.equals(orderId, order.orderId) && Objects.equals(userId, order.userId) && Objects.equals(createdAt, order.createdAt) && Objects.equals(updatedAt, order.updatedAt) && Objects.equals(deliveryAddress, order.deliveryAddress) && Objects.equals(contactPhone, order.contactPhone) && Objects.equals(deliveryMethod, order.deliveryMethod) && Objects.equals(status, order.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderId, userId, createdAt, deliveryAddress, contactPhone, deliveryMethod, Status, updatedAt);
+        return Objects.hash(orderId, userId, createdAt, updatedAt, deliveryAddress, contactPhone, deliveryMethod, status);
     }
 
     @Override
@@ -108,11 +108,12 @@ public class Order {
                 "orderId=" + orderId +
                 ", userId=" + userId +
                 ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 ", deliveryAddress='" + deliveryAddress + '\'' +
                 ", contactPhone='" + contactPhone + '\'' +
                 ", deliveryMethod='" + deliveryMethod + '\'' +
-                ", Status=" + Status +
-                ", updatedAt=" + updatedAt +
+                ", status=" + status +
                 '}';
     }
 }
+
