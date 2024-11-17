@@ -2,6 +2,8 @@ package com.schneider.onlineshop.model;
 
 import java.util.Objects;
 
+//Избранные товары
+
 public class Favorite {
     private Long favoriteID;
     private Long userID;

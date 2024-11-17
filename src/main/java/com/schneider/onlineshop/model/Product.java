@@ -4,6 +4,8 @@ package com.schneider.onlineshop.model;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+//Товары
+
 public class Product {
     private Long ProductID;
     private String name;

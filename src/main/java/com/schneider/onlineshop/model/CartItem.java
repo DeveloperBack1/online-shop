@@ -1,6 +1,10 @@
 package com.schneider.onlineshop.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+//Товары в корзине
 
 public class CartItem {
 
@@ -75,4 +79,18 @@ public class CartItem {
                 ", quantity=" + quantity +
                 '}';
     }
+
+//    public static void main(String[] args) {
+//        CartItem item1 = new CartItem(1, 101, 1001, 2); // ID товара 1001, количество 2
+//        CartItem item2 = new CartItem(2, 101, 1002, 1); // ID товара 1002, количество 1
+//        CartItem item3 = new CartItem(3, 101, 1003, 5);
+//        CartItem item4 = new CartItem(4, 101, 1004, 7);
+//        CartItem item5 = new CartItem(5, 101, 1005, 6);
+//        List<CartItem> cartItemList = new ArrayList<>();
+//        cartItemList.add(item1);
+//        cartItemList.add(item2);
+//        cartItemList.add(item3);
+//        cartItemList.add(item4);
+//        cartItemList.add(item5);
+//    }
 }

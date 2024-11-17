@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+//Корзина
+
 public class Cart {
     private int cartID;
     private int userID;

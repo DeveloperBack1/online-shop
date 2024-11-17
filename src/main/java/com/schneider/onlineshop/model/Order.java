@@ -3,6 +3,8 @@ package com.schneider.onlineshop.model;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+// Заказы
+
 public class Order {
 
     private Long orderId;

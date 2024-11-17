@@ -14,8 +14,17 @@ public class OrderItemController {
 
     private final List<OrderItem> orderItemList = new ArrayList<>();
 
+
     @GetMapping
     public List<OrderItem> getAllOrderItems() {
+
+      //  List<OrderItem> orderItems = new ArrayList<>();
+        orderItemList.add(new OrderItem(1, 101, 1001, 2, 50.00)); // ID заказа 101, продукт 1001, 2 шт., цена 50.00
+        orderItemList.add(new OrderItem(2, 101, 1002, 1, 30.00)); // ID заказа 101, продукт 1002, 1 шт., цена 30.00
+        orderItemList.add(new OrderItem(3, 102, 1003, 5, 20.00)); // ID заказа 102, продукт 1003, 5 шт., цена 20.00
+        orderItemList.add(new OrderItem(4, 103, 1004, 3, 70.00));
+
+
         return orderItemList;
     }
 

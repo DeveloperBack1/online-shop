@@ -3,6 +3,8 @@ package com.schneider.onlineshop.model;
 
 import java.util.Objects;
 
+//Товары в заказе
+
 public class OrderItem {
     private int orderItemID;
     private int orderID;
@@ -86,5 +88,6 @@ public class OrderItem {
                 ", priceAtPurchase=" + priceAtPurchase +
                 '}';
     }
+
 
 }

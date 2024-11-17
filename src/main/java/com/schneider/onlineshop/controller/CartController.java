@@ -54,6 +54,7 @@ public class CartController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCart(@PathVariable int id) {
+
         boolean removed = cartList.removeIf(cart -> cart.getCartID() == id);
         if (removed) {
             return ResponseEntity.noContent().build();

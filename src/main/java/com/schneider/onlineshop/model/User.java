@@ -3,6 +3,8 @@ package com.schneider.onlineshop.model;
 
 import java.util.Objects;
 
+//Пользователи
+
 public class User {
     private Long userID;
     private String name;

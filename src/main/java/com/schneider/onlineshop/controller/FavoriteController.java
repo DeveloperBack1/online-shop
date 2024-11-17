@@ -14,6 +14,11 @@ public class FavoriteController {
 
     @GetMapping
     public List<Favorite> getAllFavorites() {
+        favoriteList.add(new Favorite(1L, 101L, 1001L)); // Пользователь 101 добавил товар 1001 в избранное
+        favoriteList.add(new Favorite(2L, 101L, 1002L)); // Пользователь 101 добавил товар 1002 в избранное
+        favoriteList.add(new Favorite(3L, 102L, 1003L)); // Пользователь 102 добавил товар 1003 в избранное
+        favoriteList.add(new Favorite(4L, 103L, 1004L)); // Пользователь 103 добавил товар 1004 в избранное
+
         return favoriteList;
     }
 

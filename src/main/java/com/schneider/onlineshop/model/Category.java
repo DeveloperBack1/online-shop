@@ -2,6 +2,8 @@ package com.schneider.onlineshop.model;
 
 import java.util.Objects;
 
+//Категории товаров
+
 public class Category {
 
     private long categoryID ;

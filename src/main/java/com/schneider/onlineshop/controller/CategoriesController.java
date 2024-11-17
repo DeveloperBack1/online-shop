@@ -17,6 +17,7 @@ public class CategoriesController {
 
     @PostConstruct
     void init() {
+
         categoryList = new ArrayList<>();
         categoryList.add(new Category(1, "Lebensmittel"));
         categoryList.add(new Category(2, "Haushaltschemikalien>"));
