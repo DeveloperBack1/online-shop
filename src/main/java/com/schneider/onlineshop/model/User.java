@@ -1,9 +1,6 @@
 package com.schneider.onlineshop.model;
 
-
 import java.util.Objects;
-
-//Пользователи
 
 public class User {
     private Long userID;
@@ -11,18 +8,13 @@ public class User {
     private String email;
     private String phoneNumber;
     private String passwordHash;
-    String rolle;
 
-
-
-    public User(Long userID, String name, String email, String phoneNumber, String passwordHash,
-                String rolle) {
+    public User(Long userID, String name, String email, String phoneNumber, String passwordHash) {
         this.userID = userID;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.passwordHash = passwordHash;
-        this.rolle = rolle;
     }
 
     public Long getUserID() {
@@ -65,25 +57,23 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
-    public String getRolle() {
-        return rolle;
-    }
-
-    public void setRolle(String rolle) {
-        this.rolle = rolle;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         User user = (User) o;
-        return Objects.equals(userID, user.userID) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(passwordHash, user.passwordHash) && Objects.equals(rolle, user.rolle);
+        return Objects.equals(userID, user.userID) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(passwordHash, user.passwordHash);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userID, name, email, phoneNumber, passwordHash, rolle);
+        int result = Objects.hashCode(userID);
+        result = 31 * result + Objects.hashCode(name);
+        result = 31 * result + Objects.hashCode(email);
+        result = 31 * result + Objects.hashCode(phoneNumber);
+        result = 31 * result + Objects.hashCode(passwordHash);
+        return result;
     }
 
     @Override
@@ -94,7 +84,6 @@ public class User {
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", passwordHash='" + passwordHash + '\'' +
-                ", rolle='" + rolle + '\'' +
                 '}';
     }
 }

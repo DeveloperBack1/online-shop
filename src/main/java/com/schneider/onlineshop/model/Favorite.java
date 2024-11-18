@@ -10,6 +10,7 @@ public class Favorite {
     private Long productID;
 
     public Favorite(Long favoriteID, Long userID, Long productID) {
+
         this.favoriteID = favoriteID;
         this.userID = userID;
         this.productID = productID;

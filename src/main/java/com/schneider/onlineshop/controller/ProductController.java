@@ -12,6 +12,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
+
     private final List<Product> products = new ArrayList<>();
 
     // Инициализация с тестовыми данными

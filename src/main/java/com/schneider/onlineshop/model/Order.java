@@ -6,7 +6,6 @@ import java.util.Objects;
 // Заказы
 
 public class Order {
-
     private Long orderId;
     private Long userId;
     Timestamp createdAt;

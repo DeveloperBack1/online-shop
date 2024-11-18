@@ -1,10 +1,15 @@
 package com.schneider.onlineshop.controller;
 
 import com.schneider.onlineshop.model.Category;
+import com.schneider.onlineshop.service.CategoriesService;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,79 +17,66 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/categories")
 public class CategoriesController {
+    //@Autowired - иньекция через value (не рекомендуемая из-за Reflection)
+    private CategoriesService categoryService;
 
-    private List<Category> categoryList;
-
-    @PostConstruct
-    void init() {
-
-        categoryList = new ArrayList<>();
-        categoryList.add(new Category(1, "Lebensmittel"));
-        categoryList.add(new Category(2, "Haushaltschemikalien>"));
-        categoryList.add(new Category(3, "Funktechnik"));
-        categoryList.add(new Category(4, "Spielzeugen"));
-        categoryList.add(new Category(5, "Kleider"));
-        categoryList.add(new Category(6, "Other"));
-
-
-
-        System.out.println("Выполняем логику при создании объекта "+this.getClass().getName());
+    //@Autowired - иньекция через конструктор (рекомендуемая !!!), авто аннотирование с версии 3.0
+    public CategoriesController(CategoriesService categoryService) {
+        this.categoryService = categoryService;
     }
 
-    @GetMapping
-    List<Category> getAllCategories() {
-        return categoryList;
+    // @Autowired - иньекция через сеттер (обязательно использовать аннотацию)
+    public void setCategoryService(CategoriesService categoryService) {
+        this.categoryService = categoryService;
+    }
+
+    @GetMapping  //select
+    public List<Category> getAllCategories() {
+        return categoryService.getAllCategories();
     }
 
     @GetMapping(value = "/find/{id}")
-    Category getCategoryById(@PathVariable Long id) { ///categories/find/3
-        return categoryList.stream()
-                .filter(category -> category.getCategoryID()==id)
-                .findFirst()
-                .orElse(null);
+    public Category getCategoryById(@PathVariable Long id) { ///categories/find/3
+        return categoryService.getCategoryById(id);
     }
 
     // Экранирование кириллицы для url - https://planetcalc.ru/683/
     @GetMapping(value = "/get")
-    Category getCategoryByName(@RequestParam String name) { ///categories/get?name=Other,k=2
-        return categoryList.stream()
-                .filter(category -> category.getName().equals(name))
-                .findFirst()
-                .orElse(null);
+    public Category getCategoryByName(@RequestParam String name) { ///categories/get?name=Other,k=2
+        return categoryService.getCategoryByName(name);
     }
 
-@PostMapping
-public boolean createCategories(@RequestBody Category newCategory) {
-        return categoryList.add(newCategory);
-}
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping //Jackson
+    public boolean createCategories(@RequestBody Category newCategory) { //insert
+        return categoryService.createCategories(newCategory);
+    }
 
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping
     public Category updateCategories(@RequestBody Category updCategory) { //update
-        Category result = categoryList.stream()
-                .filter(category -> category.getCategoryID() == updCategory.getCategoryID())
-                .findFirst()
-                .orElse(null);
-        if(result!=null) {
-            result.setName(updCategory.getName());
-        }
-        return result;
+        return categoryService.updateCategories(updCategory);
     }
 
     @DeleteMapping(value = "/{id}")
     public void deleteCategories(@PathVariable Long id) { //delete
-        Iterator<Category> it = categoryList.iterator();
-        while (it.hasNext()) {
-            Category current = it.next();
-            if(current.getCategoryID()==id) {
-                it.remove();
-            }
-        }
+        categoryService.deleteCategories(id);
     }
-    @PreDestroy
-    void destroy() {
-        System.out.println("Выполняем логику при окончании работы с  объектом "+this.getClass().getName());
+
+    // альтернативная обработка ошибочной ситуации Exception
+    @ExceptionHandler({IllegalArgumentException.class, FileNotFoundException.class})
+    public ResponseEntity handleTwoException(Exception exception) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(exception.getMessage());
     }
+
+    // альтернативная обработка ошибочной ситуации Exception
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity handleException(Exception exception) {
+        return ResponseEntity
+                .status(HttpStatus.I_AM_A_TEAPOT)
+                .body("Извините, что-то пошло не так. Попробуйте позже!");
+    }
+
 }
-
-
-

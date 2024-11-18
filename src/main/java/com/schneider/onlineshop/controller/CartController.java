@@ -22,8 +22,10 @@ public class CartController {
     }
 
     @GetMapping("/{id}")
+
     public ResponseEntity<Cart> getCartById(@PathVariable int id) {
         Optional<Cart> cart = cartList.stream()
+
                 .filter(c -> c.getCartID() == id)
                 .findFirst();
         return cart.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());

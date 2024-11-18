@@ -17,7 +17,6 @@ public class CartItemController {
 
     @GetMapping
     public List<CartItem> getAllCartItems() {
-
         CartItem item1 = new CartItem(1, 101, 1001, 2); // ID товара 1001, количество 2
         CartItem item2 = new CartItem(2, 101, 1002, 1); // ID товара 1002, количество 1
         CartItem item3 = new CartItem(3, 101, 1003, 5);

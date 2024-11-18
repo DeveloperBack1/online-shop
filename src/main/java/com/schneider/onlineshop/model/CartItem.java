@@ -7,7 +7,6 @@ import java.util.Objects;
 //Товары в корзине
 
 public class CartItem {
-
     private int cartItemID;
     private int cartID;
     private int productID;
