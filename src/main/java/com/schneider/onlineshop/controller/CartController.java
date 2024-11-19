@@ -1,83 +1,52 @@
 package com.schneider.onlineshop.controller;
 
-
 import com.schneider.onlineshop.model.Cart;
-import com.schneider.onlineshop.model.CartItem;
+import com.schneider.onlineshop.service.CartService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-        import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/carts")
 public class CartController {
+    private final CartService cartService;
 
-    private final List<Cart> cartList = new ArrayList<>();
+    public CartController(CartService cartService) {
+        this.cartService = cartService;
+    }
 
     @GetMapping
-    public List<Cart> getAllCarts() {
-        return cartList;
+    public ResponseEntity<List<Cart>> getAllCarts() {
+        return new ResponseEntity<>(cartService.getAllCarts(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-
     public ResponseEntity<Cart> getCartById(@PathVariable int id) {
-        Optional<Cart> cart = cartList.stream()
-
-                .filter(c -> c.getCartID() == id)
-                .findFirst();
-        return cart.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return cartService.getCartById(id)
+                .map(cart -> new ResponseEntity<>(cart, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
-    public ResponseEntity<Cart> createCart(@RequestBody Cart cart) {
-        cartList.add(cart);
-        return ResponseEntity.ok(cart);
+    public ResponseEntity<Cart> addCart(@RequestBody Cart cart) {
+        return new ResponseEntity<>(cartService.addCart(cart), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Cart> updateCart(@PathVariable int id, @RequestBody Cart updatedCart) {
-        Optional<Cart> existingCart = cartList.stream()
-                .filter(c -> c.getCartID() == id)
-                .findFirst();
-
-        if (existingCart.isPresent()) {
-            Cart cart = existingCart.get();
-            cart.setUserID(updatedCart.getUserID());
-            cart.setCartItems(updatedCart.getCartItems());
-
-            return ResponseEntity.ok(cart);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return cartService.updateCart(id, updatedCart)
+                .map(cart -> new ResponseEntity<>(cart, HttpStatus.ACCEPTED))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCart(@PathVariable int id) {
-
-        boolean removed = cartList.removeIf(cart -> cart.getCartID() == id);
-        if (removed) {
-            return ResponseEntity.noContent().build();
+        if (cartService.deleteCart(id)) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PostMapping("/{cartId}/items")
-    public ResponseEntity<Cart> addCartItem(@PathVariable int cartId, @RequestBody CartItem cartItem) {
-        Optional<Cart> existingCart = cartList.stream()
-                .filter(c -> c.getCartID() == cartId)
-                .findFirst();
-
-        if (existingCart.isPresent()) {
-            Cart cart = existingCart.get();
-            cart.getCartItems().add(cartItem);
-            return ResponseEntity.ok(cart);
-        } else {
-            return ResponseEntity.notFound().build();
-
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
